@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+</head>
+<body>
+
+<script th:inline="javascript">	
+	var weekNumber = -1;
+	var dayInWeekNumber = -1;
+
+	$('#timeshitModal').on('show.bs.modal', function (event) {
+		var div = $(event.relatedTarget) // Button that triggered the modal
+		weekNumber = div.data('week-number') // Extract info from data-object-name attribute
+		dayInWeekNumber = div.data('day-number') // Extract info from data-object-name attribute
+		//monthNr = div.data('month-number')
+	});
+	
+	function addAnnotation (){
+		console.log(weekNumber);
+		console.log(dayInWeekNumber);
+		var selection = $('#projectSelectionInput option:selected').val();
+		var workedHours = $('#workedHoursInput').val();
+		console.log(selection);
+		console.log(workedHours);
+		$.ajax({
+			  type: "POST",
+			  url: "http://localhost:8090/timeshitcalendar/add/adnotation",
+			  data: {weekNumber: weekNumber, dayInWeekNumber: dayInWeekNumber, projectId: selection, workedHours: workedHours},
+			  success: function(){
+				  console.log("Success");
+				 // location.reload();
+				 // JSON.stringify( { "weekNumber": weekNumber, "dayInWeekNumber": dayInWeekNumber } ),
+				//	$("#timeshitCalendar").load("/timeshit/year/2019/month/1");	
+			  }
+			});
+	}
+
+
+</script>
+<!-- 
+	<button  type="button" class="btn btn-primary w-100" th:text="TEST" ></button>
+	 data-week-number="${iterStat.index}" data-day-number="${day.dayInWeek}"
+	 , month-number=''+${iterStat.index}+''
+	 th:attr="month-number=''+${iterStat.index}+''" 
+	 -->
+<div class="col-lg-12">
+	<table id="calendar">
+	  <tr class="weekdays bg-success">
+	    <th scope="col" th:text="Poniedziałek"></th>
+	    <th scope="col" th:text="Wtorek"></th>
+	    <th scope="col" th:text="Środa"></th>
+	    <th scope="col" th:text="Czwartek"></th>
+	    <th scope="col" th:text="Piątek"></th>
+	    <th scope="col" th:text="Sobota"></th>
+	    <th scope="col" th:text="Niedziela"></th>
+	  </tr>
+	 <tr class="days" th:each="week,iterStat  : ${calendar.weeks}">
+	    <td class="day" th:with="weekNumber+${day.dayNumber}=${iterStat.index}"  th:each="day : ${week.days}" th:classappend="${((day.dayInWeek == 6 || day.dayInWeek == 7) && day.currentMonth ? 'weekends' : '') + (!day.currentMonth ? 'other-month' : '')}">
+	    	<div class="w-100 h-100" th:if="${day.currentMonth}" data-toggle="modal" data-target="#timeshitModal" 
+	    			th:attr="data-week-number=''+${iterStat.index}+'', data-day-number=''+${day.dayInWeek}+''">
+	      		<div class="date" th:text=${day.dayNumber}></div>
+			</div>
+			<div class="w-100 h-100" th:if="${!day.currentMonth}">
+	      		<div class="date" th:text=${day.dayNumber}></div>
+			</div>
+			<div class="event" th:each="annotation : ${day.annotations}">
+	      		<div class="float-left" th:text=${annotation.name}></div>
+	      		<div class="float-right" th:text=${annotation.hours}></div>
+			</div>
+
+	    </td>
+	</tr>
+	</table>
+</div>
+
+<div class="modal" id="timeshitModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+	<form action="#">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Zaraportuj czas pracy w danym projekcie</h5>
+        <!--  th:text="" -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row pt-1 pl-1 pr-1">
+       		<div class="form-group">
+			    <p th:text="${dayNumber}"></p>
+			    
+			</div>
+			<div class="col-lg-12 form-group">
+        		<label>Wybierz projekt</label>
+				<select id="projectSelectionInput" class="form-control ums-input-bg-color-lb">
+				    <option class="ums-input-bg-color-lb" value="1">Projekt A</option>
+				    <option class="ums-input-bg-color-lb" value="2">Projekt B</option>
+				    <option class="ums-input-bg-color-lb" value="3">Projekt C</option>
+				    <option class="ums-input-bg-color-lb" value="4">Projekt D</option>
+				</select>
+				<div class="form-group">
+				    <label for="Liczba godzin">Liczba przeprocesowanych godzin</label>
+				    <input id="workedHoursInput" type="number" min="0" value="0" step="0.5" class="form-control" aria-describedby="Podaj liczbę przeprowadzonych godzin" placeholder="Podaj liczbę przeprowadzonych godzin">
+				    <!-- th:action="@{/greeting}" th:object="${annotation}"  th:field="{name} th:field="{hours}"<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+				</div>
+
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onClick="addAnnotation();" class="btn btn-primary" th:text="Zaraportuj"></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="Wyjdz"></button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

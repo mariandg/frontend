@@ -1,0 +1,52 @@
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" th:href="@{/}">Mój portal</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav"> <!--  th:classappend="${module == 'home' ? 'active' : ''}" <a href="#" th:href="@{/}">Us³ugi i Zadania</a>-->   
+            <li class="nav-item dropdown">
+	            <a class="nav-link dropdown-toggle" href="/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Us³ugi i Zadania</a>
+	            <div class="dropdown-menu" aria-labelledby="dropdown01">
+	              <a class="dropdown-item" href="#">Action</a>
+	              <a class="dropdown-item" href="#">Another action</a>
+	              <a class="dropdown-item" href="#">Something else here</a>
+	            </div>
+            </li>
+            <li>
+              <a href="#" th:href="@{/persons/all}">Dokumenty i Procedury</a>
+            </li>
+            <li>
+              <a href="#" th:href="@{/person}">Wdro¿enie i Rozwój</a>
+            </li>
+            <li>
+              <a href="#" th:href="@{/person}">Oferty Pracy</a>
+            </li>
+            <li>
+              <a href="#" th:href="@{/person}">O Firmie</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          <!--  
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/signin}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+              </a>
+            </li>
+            <li>
+              <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+              </a>
+             <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+            </li>
+            
+           -->
+          </ul>
+        </div>
+      </div>
+    </div>

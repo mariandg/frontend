@@ -1,0 +1,179 @@
+.ums-background-image{
+    background: url("/images/pracownik.jpeg")
+               no-repeat center center fixed;
+	background-size: 100% 100%;
+	/*
+	    background: url("/images/pracownik.jpeg")
+                no-repeat center center fixed;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	*/
+}
+.ums-home-page{	
+	background-color: rgba(72,72,72, 0.8);
+	min-height:500px;
+}
+.ums-text-whitout-opacity{
+	opacity:1;
+}
+.ums-input-bg-color-lb{
+	background-color: rgba(211,242,242);
+}
+input[type="number"]{
+	background-color: rgba(211,242,242);	
+}
+/* declare a 7 column grid on the table */
+#calendar {
+  background-color: rgba(255,250,250, 0.2);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+#calendar tr, #calendar tbody {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+ width: 100%;
+}
+
+caption {
+	text-align: center;
+  grid-column: 1 / -1;
+  font-size: 130%;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+#calendar a {
+	color: #8e352e;
+	text-decoration: none;
+}
+
+#calendar td, #calendar th {
+	padding: 5px;
+	box-sizing:border-box;
+	border: 1px solid #ccc;
+}
+
+#calendar .weekdays {
+	background: #8e352e;  
+}
+
+
+#calendar .weekdays th {
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 20px;
+	border: none !important;
+	padding: 10px 6px;
+	color: #fff;
+	font-size: 13px;
+}
+
+#calendar td {
+	min-height: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+#calendar .days li:hover {
+	background: #d3d3d3;
+}
+
+#calendar .date {
+	text-align: center;
+	margin-bottom: 5px;
+	padding: 4px;
+	background: #333;
+	color: #fff;
+	width: 20px;
+	border-radius: 50%;
+  flex: 0 0 auto;
+  align-self: flex-end;
+}
+
+#calendar .event {
+  	/*flex: 0 0 auto;*/
+	font-size: 13px;
+	border-radius: 4px;
+	padding: 5px;
+	margin-bottom: 5px;
+	line-height: 14px;
+	background: #e4f2f2;
+	border: 1px solid #b5dbdc;
+	color: #009aaf;
+	text-decoration: none;
+}
+
+#calendar .event-desc {
+	color: #666;
+	margin: 3px 0 7px 0;
+	text-decoration: none;	
+}
+
+#calendar .other-month {
+	/*background: #f5f5f5;*/
+	background-color: rgba(72,72,72, 0.9);
+	color: #666;
+}
+
+#calendar .weekends {
+	/*background: #f5f5f5;*/
+	background-color: rgba(250,128,114, 0.2);
+	color: #666;
+}
+/* ============================
+				Mobile Responsiveness
+   ============================*/
+
+
+@media(max-width: 768px) {
+
+	#calendar .weekdays, #calendar .other-month {
+		display: none;
+	}
+
+	#calendar li {
+		height: auto !important;
+		border: 1px solid #ededed;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: -1px;
+	}
+  
+  #calendar, #calendar tr, #calendar tbody {
+    grid-template-columns: 1fr;
+  }
+  
+  #calendar  tr {
+    grid-column: 1 / 2;
+  }
+
+	#calendar .date {
+		align-self: flex-start;
+	}
+}
+/*
+.ums-day-input{
+	width:100%;
+}
+.background-image::after{
+	content : "";
+    display: block;
+	position:absolute;
+	top: 0;
+    left: 0;
+    background: url("/images/pracownik.jpeg")
+                no-repeat center center fixed;
+	background-size: 100% 100%;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	z-index:-1;
+}
+.opacity-03{
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+}
+url{[[@{/static/images/pracownik.jpeg}]]}
+*/

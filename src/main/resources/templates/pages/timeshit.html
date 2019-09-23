@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <title>Getting Started: Serving Web Content</title>
+</head>
+<body>
+	<script th:inline="javascript">
+		var monthId = 0;
+		var montName = "";
+
+		function setCssForButtons (monthIdParam){
+			var elements = document.getElementsByClassName('btn');
+			for(var i = 0 ; elements.length > i ; i++) {
+				elements[i].classList.remove("btn-success");
+				elements[i].classList.add("btn-primary");
+			}					
+			document.getElementById('m'+monthIdParam).classList.remove("btn-primary");
+			document.getElementById('m'+monthIdParam).classList.add("btn-success");
+		}
+		
+		function setMonthId(monthIdParam) {
+			monthId = monthIdParam;
+			var url = "/timeshit/year/2019/month/";
+				
+			switch(monthIdParam){
+				case 1: {
+					monthName =  "Styczeń";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"1");					
+					break;
+				}
+				case 2: {
+					monthName =  "Luty";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"2");	
+					break;
+				}
+				case 3: {
+					monthName =  "Marzec";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"3");	
+					break;
+				}
+				case 4: {
+					monthName =  "Kwiecień";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"4");	
+					break;
+				}
+				case 5: {
+					monthName =  "Maj";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"5");	
+					break;
+				}
+				case 6: {
+					monthName =  "Czerwiec";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"6");	
+					break;
+				}
+				case 7: {
+					monthName =  "Lipiec";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"7");	
+					break;
+				}
+				case 8: {
+					monthName =  "Sierpień";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"8");	
+					break;
+				}
+				case 9: {
+					monthName =  "Wrzesień";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"9");		
+					break;
+				}
+				case 10: {
+					monthName = "Pazdziernik";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"10");	
+					break;
+				}
+				case 11: {
+					monthName = "Listopad";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"11");	
+					break;
+				}
+				case 12: {
+					monthName = "Grudzień";
+					setCssForButtons(monthIdParam);
+					$("#timeshitCalendar").load(url+"12");	
+					break;
+				}
+			}
+			document.getElementById('monthName').innerHTML = monthName;
+		}
+	</script>
+	<div class="row pt-3 pl-1 pr-1">
+		<div class="col-lg-2"><button id="m1"  type="button" class="btn btn-primary w-100" th:text="Styczeń" 	th:onclick="'setMonthId(1);'"></button></div>
+		<div class="col-lg-2"><button id="m2"  type="button" class="btn btn-primary w-100" th:text="Luty" 		th:onclick="'setMonthId(2);'"></button></div>
+		<div class="col-lg-2"><button id="m3"  type="button" class="btn btn-primary w-100" th:text="Marzec" 	th:onclick="'setMonthId(3);'"></button></div>
+		<div class="col-lg-2"><button id="m4"  type="button" class="btn btn-primary w-100" th:text="Kwiecień" 	th:onclick="'setMonthId(4);'"></button></div>
+		<div class="col-lg-2"><button id="m5"  type="button" class="btn btn-primary w-100" th:text="Maj" 		th:onclick="'setMonthId(5);'"></button></div>
+		<div class="col-lg-2"><button id="m6"  type="button" class="btn btn-primary w-100" th:text="Czerwiec" 	th:onclick="'setMonthId(6);'"></button></div>
+	</div>
+	<div class="row pt-1 pl-1 pr-1">
+		<div class="col-lg-2"><button id="m7"  type="button" class="btn btn-primary w-100" th:text="Lipiec" 	th:onclick="'setMonthId(7);'"></button></div>
+		<div class="col-lg-2"><button id="m8"  type="button" class="btn btn-primary w-100" th:text="Sierpień" 	th:onclick="'setMonthId(8);'"></button></div>
+		<div class="col-lg-2"><button id="m9"  type="button" class="btn btn-primary w-100" th:text="Wrzesień" 	th:onclick="'setMonthId(9);'"></button></div>
+		<div class="col-lg-2"><button id="m10" type="button" class="btn btn-primary w-100" th:text="Pazdziernik"th:onclick="'setMonthId(10);'"></button></div>
+		<div class="col-lg-2"><button id="m11" type="button" class="btn btn-primary w-100" th:text="Listopad" 	th:onclick="'setMonthId(11);'"></button></div>
+		<div class="col-lg-2"><button id="m12" type="button" class="btn btn-primary w-100" th:text="Grudzień" 	th:onclick="'setMonthId(12);'"></button></div>
+	</div>
+	<hr>
+	<div id="timeshitInfo" class="row pt-1 pl-1 pr-1">
+		<div class="col-lg-12 text-info">
+			<h4 id="monthName"></h3>
+			<p>Wypełnij kartę czasu pracy dla aktualnego miesiąca. Podaj liczbę godzin które faktycznie przepracowałeś</p>
+		</div>
+	</div>
+	<div id="timeshitCalendar" class="row pt-1 pl-1 pr-1">
+		
+	</div>
+	<script>
+	</script>
+	
+</body>
+</html>

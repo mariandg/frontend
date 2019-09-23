@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <title>Getting Started: Serving Web Content</title>
+</head>
+<body>
+	<script th:inline="javascript">
+		var monthId = 0;
+		var montName = "";
+
+		function setCssForButtons (monthIdParam){
+			var elements = document.getElementsByClassName('btn');
+			for(var i = 0 ; elements.length > i ; i++) {
+				elements[i].classList.remove("btn-success");
+				elements[i].classList.add("btn-primary");
+			}					
+			document.getElementById('m'+monthIdParam).classList.remove("btn-primary");
+			document.getElementById('m'+monthIdParam).classList.add("btn-success");
+		}
+		
+		function setMonthId(monthIdParam) {
+			monthId = monthIdParam;
+			document.getElementById('timeshitInfo').classList.remove("d-none");
+			document.getElementById('timeshitDetails').classList.remove("d-none");	
+			switch(monthIdParam){
+				case 1: {
+					monthName =  "Styczeń";
+					document.getElementById('day31').classList.remove("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 2: {
+					monthName =  "Luty";
+					document.getElementById('day31').classList.add("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 3: {
+					monthName =  "Marzec";
+					document.getElementById('day31').classList.remove("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 4: {
+					monthName =  "Kwiecień";
+					document.getElementById('day31').classList.add("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 5: {
+					monthName =  "Maj";
+					document.getElementById('day31').classList.remove("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 6: {
+					monthName =  "Czerwiec";
+					document.getElementById('day31').classList.add("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 7: {
+					monthName =  "Lipiec";
+					document.getElementById('day31').classList.remove("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 8: {
+					monthName =  "Sierpień";
+					document.getElementById('day31').classList.remove("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 9: {
+					monthName =  "Wrzesień";
+					document.getElementById('day31').classList.add("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 10: {
+					monthName = "Pazdziernik";
+					document.getElementById('day31').classList.remove("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 11: {
+					monthName = "Listopad";
+					document.getElementById('day31').classList.add("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+				case 12: {
+					monthName = "Grudzień";
+					document.getElementById('day31').classList.remove("d-none");
+					setCssForButtons(monthIdParam);
+					break;
+				}
+			}
+			document.getElementById('monthName').innerHTML = monthName;
+		}
+	</script>
+	<div class="row pt-3 pl-1 pr-1">
+		<div class="col-lg-2"><button id="m1"  type="button" class="btn btn-primary w-100" th:text="Styczeń" 	th:onclick="'setMonthId(1);'"></button></div>
+		<div class="col-lg-2"><button id="m2"  type="button" class="btn btn-primary w-100" th:text="Luty" 		th:onclick="'setMonthId(2);'"></button></div>
+		<div class="col-lg-2"><button id="m3"  type="button" class="btn btn-primary w-100" th:text="Marzec" 	th:onclick="'setMonthId(3);'"></button></div>
+		<div class="col-lg-2"><button id="m4"  type="button" class="btn btn-primary w-100" th:text="Kwiecień" 	th:onclick="'setMonthId(4);'"></button></div>
+		<div class="col-lg-2"><button id="m5"  type="button" class="btn btn-primary w-100" th:text="Maj" 		th:onclick="'setMonthId(5);'"></button></div>
+		<div class="col-lg-2"><button id="m6"  type="button" class="btn btn-primary w-100" th:text="Czerwiec" 	th:onclick="'setMonthId(6);'"></button></div>
+	</div>
+	<div class="row pt-1 pl-1 pr-1">
+		<div class="col-lg-2"><button id="m7"  type="button" class="btn btn-primary w-100" th:text="Lipiec" 	th:onclick="'setMonthId(7);'"></button></div>
+		<div class="col-lg-2"><button id="m8"  type="button" class="btn btn-primary w-100" th:text="Sierpień" 	th:onclick="'setMonthId(8);'"></button></div>
+		<div class="col-lg-2"><button id="m9"  type="button" class="btn btn-primary w-100" th:text="Wrzesień" 	th:onclick="'setMonthId(9);'"></button></div>
+		<div class="col-lg-2"><button id="m10" type="button" class="btn btn-primary w-100" th:text="Pazdziernik"th:onclick="'setMonthId(10);'"></button></div>
+		<div class="col-lg-2"><button id="m11" type="button" class="btn btn-primary w-100" th:text="Listopad" 	th:onclick="'setMonthId(11);'"></button></div>
+		<div class="col-lg-2"><button id="m12" type="button" class="btn btn-primary w-100" th:text="Grudzień" 	th:onclick="'setMonthId(12);'"></button></div>
+	</div>
+	<hr>
+	<div id="timeshitInfo" class="row pt-1 pl-1 pr-1">
+		<div class="col-lg-12 text-info">
+			<h3 id="monthName"></h3>
+			<p>Wypełnij kartę czasu pracy dla aktualnego miesiąca. Podaj liczbę godzin które faktycznie przepracowałeś</p>
+		</div>
+	</div>
+	<form id="timeshitDetails" action="#" th:action="@{/processForm}"  method="post">
+		<div class="row pt-1 pl-1 pr-1">
+			<div class="col-lg-3 form-group">
+				<select class="form-control ums-input-bg-color-lb">
+				    <option class="ums-input-bg-color-lb" value="a">Projekt A</option>
+				    <option class="ums-input-bg-color-lb" value="b">Projekt B</option>
+				    <option class="ums-input-bg-color-lb" value="c">Projekt C</option>
+				    <option class="ums-input-bg-color-lb" value="d">Projekt D</option>
+				</select>
+			</div>
+		</div>
+		<div class="row pt-1 pl-1 pr-1">
+			<div class="col-lg-1 form-group">
+				<label  class="w-100 text-center text-info" style="display: table;" th:text="1. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="2. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>			
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="3. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>			
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="4. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="5. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="6. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="7. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="8. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="9. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="10. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="11. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="12. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="13. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="14. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="15. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="16. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="17. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="18. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="19. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="20. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="21. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="22. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="23. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="24. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="25. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="26. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="27. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="28. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="29. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+			<div class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="30. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+		  	<div id="day31" class="col-lg-1 form-group">
+				<label class="w-100 text-center text-info" style="display: table;" th:text="31. "></label>
+		  		<input type="number" class="form-control w-100" value="0"/>
+		  	</div>
+		</div>
+	</form>
+	<script>
+		document.getElementById('timeshitInfo').classList.add("d-none");
+		document.getElementById('timeshitDetails').classList.add("d-none");		
+	</script>
+</body>
+</html>
